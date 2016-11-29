@@ -1,6 +1,6 @@
-FROM buildpack-deps:xenial-curl
+FROM buildpack-deps:xenial-curl 
 
-MAINTAINER Alexei Ledenev <alexei.led@gmail.com>
+MAINTAINER Daniel Bieri <daenu.bieri@gmail.com>
 
 COPY chkconfig /sbin/chkconfig
 COPY init.ora /
