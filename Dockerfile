@@ -6,11 +6,9 @@ COPY chkconfig /sbin/chkconfig
 COPY init.ora /
 COPY initXETemp.ora /
 
-RUN apt-get update && \
-    apt-get install -y libaio1 net-tools bc unixodbc && \
-    apt-get autoremove && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+
+RUN apt-get install -y libaio1 net-tools bc unixodbc 
 
 RUN ln -s /usr/bin/awk /bin/awk
 RUN mkdir /var/lock/subsys
@@ -42,6 +40,11 @@ RUN echo "5 1 * * * find /u01/app/oracle/diag/rdbms/xe/XE/trace/*.trc -mtime +1 
 RUN echo "15 1 * * * find /u01/app/oracle/diag/rdbms/xe/XE/trace/*.trm -mtime +1 -delete -print >>/var/log/cron.txt 2>&1" >> /root/crontab.txt
 RUN echo "" >> /root/crontab.txt
 RUN /usr/bin/crontab /root/crontab.txt
+
+#cleanup apt
+RUN apt-get autoremove && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV ORACLE_HOME /u01/app/oracle/product/11.2.0/xe
 
