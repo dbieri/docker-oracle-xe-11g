@@ -1,4 +1,4 @@
-FROM buildpack-deps:trusty-curl
+FROM buildpack-deps:xenial-curl
 
 MAINTAINER Alexei Ledenev <alexei.led@gmail.com>
 
