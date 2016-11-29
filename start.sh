@@ -22,5 +22,8 @@ echo "End init."
 
 echo "Oracle started successfully!"
 
+#start cron
+/usr/sbin/cron -L 15
+
 # forever loop just to prevent Docker container to exit, when run as daemon
 while true; do sleep 1000; done

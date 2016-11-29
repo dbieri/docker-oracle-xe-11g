@@ -36,6 +36,15 @@ RUN echo 'export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe' >> /etc/bash.bas
 RUN echo 'export PATH=$ORACLE_HOME/bin:$PATH' >> /etc/bash.bashrc
 RUN echo 'export ORACLE_SID=XE' >> /etc/bash.bashrc
 
+######### crontab to remove trc and trm files #########
+RUN apt-get install cron
+RUN echo "5 1 * * * find /u01/app/oracle/diag/rdbms/xe/XE/trace/*.trc -mtime +1 -delete -print >/var/log/cron.txt 2>&1" > /root/crontab.txt
+RUN echo "15 1 * * * find /u01/app/oracle/diag/rdbms/xe/XE/trace/*.trm -mtime +1 -delete -print >>/var/log/cron.txt 2>&1" >> /root/crontab.txt
+RUN echo "" >> /root/crontab.txt
+RUN /usr/bin/crontab /root/crontab.txt
+
+ENV ORACLE_HOME /u01/app/oracle/product/11.2.0/xe
+
 # Oracle data volume
 VOLUME /usr/lib/oracle/xe/oradata/XE
 # Oracle volume for init SQL scripts
