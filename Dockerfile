@@ -41,7 +41,7 @@ RUN echo "15 1 * * * find /u01/app/oracle/diag/rdbms/xe/XE/trace/*.trm -mtime +1
 RUN echo "" >> /root/crontab.txt
 RUN /usr/bin/crontab /root/crontab.txt
 
-#cleanup apt
+# cleanup apt
 RUN apt-get autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
