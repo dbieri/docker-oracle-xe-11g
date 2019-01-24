@@ -11,7 +11,7 @@ RUN apt-get update
 RUN apt-get install -y libaio1 net-tools bc unixodbc 
 
 RUN ln -s /usr/bin/awk /bin/awk
-RUN mkdir /var/lock/subsys
+RUN mkdir -p /var/lock/subsys
 RUN touch /var/lock/subsys/listener
 RUN chmod 755 /sbin/chkconfig
 RUN ln -sf /proc/mounts /etc/mtab
